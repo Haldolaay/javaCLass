@@ -1,31 +1,36 @@
  class Employee{
-	public String fname;
-	public String lname;
-	public Employee boss;
-	public address addr;
+	private String fname;
+	private String lname;
+	private Employee boss;
+	private Address addr;
 
 	
-	Employee(String fname,String lname,Employee boss,String city, String state){
-		this.fName = fname;
+	public Employee(String fname,String lname,Employee boss,String city, String state){
+		this.fname = fname;
 		this.lname = lname;
-		this.boss= this.setBoss(boss);
-		this.address = new Address(city,state);
+		this.setBoss(boss);
+		//boss != null?this.setBoss(boss):;
+		this.addr = new Address(city,state);
 	}
 
 	public String getName(){
 		return this.fname+" "+this.lname;
 	}			//returns the concatenated string fname and lname
 	public Address getAddress(){
-		return this.address;
+		return this.addr;
 	}			//returns Address object
 	public void setBoss(Employee object){
-		this.boss.Employee(object.fname,object.lname,object.boss,object.addr);
+		if (object.boss != null){
+		//this.boss = new Employee(null,null,object.boss,null,null);
+		//this.boss = new Employee().fname = object.fname;
 		/*this.boss.fname = object.fname;
 		this.boss.lname = object.lname;
 		this.boss.boss = object.boss;
-		this.boss.
+		this.boss.addr = object.addr;
 		*/
-	}	//assigns the boss of the current employee. The boss is really just another employee
+		this.boss= new Employee(object.fname,object.lname,object.boss,object.city,object.state);
+		};
+	}	//assigns the boss of the current employee. The boss is really JUST ANOTHER EMPLOYEE!!!!!!
 	public Employee getBoss(){return this.boss;}//returns the boss object which is just a reference to another employee
 
 	
@@ -33,8 +38,8 @@
 	
 }
 class Address{
-	        String city;
-	    	String state;
+	     private String city;
+	     private String state;
 
 	Address(String city,String state){
 		this.city = city;
@@ -49,6 +54,7 @@ class Driver{
 	public static void main(String[]args){
 		
 		Employee dave = new Employee("dave","bobo",null,"sacramento","california");
+		Employee kevin = new Employee("kevin","dodo",dave,"london","england");
 		System.out.println(dave.getAddress());
 		
 		

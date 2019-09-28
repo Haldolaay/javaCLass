@@ -5,16 +5,19 @@
 	private Address addr;
 
 	
-	 Employee(String fname,String lname,Employee boss,String city, String state){
+	 Employee(String fname,String lname,Employee b,String city, String state){
 		this.fname = fname;
 		this.lname = lname;
 		//this.setBoss(boss);
-		if (boss != null){this.setBoss(boss);}
+		if (b != null){this.setBoss(b);}
 		this.addr = new Address(city,state);
 	}
 
 	public String getName(){
+		if (this.fname != "null"){
 		return this.fname+" "+this.lname;
+		}else{return "null";}
+		
 	}			//returns the concatenated string fname and lname
 	public String  getAddress(){
 		return this.addr.getAddress();
@@ -22,7 +25,8 @@
 				//return this.addr.getAddress();
 	public void setBoss(Employee object){
 		if (object.fname != null){
-		this.boss = new Employee(object.fname,null,null,null,null);
+		//this.boss = new Employee(object.fname,null,null,null,null);
+				this.boss = object;
 		//this.boss = new Employee().fname = object.fname;
 		/*this.boss.fname = object.fname;
 		this.boss.lname = object.lname;
@@ -32,12 +36,25 @@
 		//this.boss= new Employee(object.fname,object.lname,object.boss,object.addr);
 		};
 	}	//assigns the boss of the current employee. The boss is really JUST ANOTHER EMPLOYEE!!!!!!
-	public Employee getBoss(){return this.boss;}//returns the boss object which is just a reference to another employee
-
+	public Employee getBoss(){
+		if (this.boss == null){
+			return new Employee("null","null",null,"null","null");
+		}else {
+		return this.boss;
+		}
+		
+		/*
+		if (this.boss != null)
+			return this.boss;
+		else {return null;}
+		*/
+		//returns the boss object which is just a reference to another employee
+	   
 	
 	
 	
-}
+    }
+ }
 class Address{
 	     private String city;
 	     private String state;
@@ -56,8 +73,9 @@ class Driver{
 		
 		Employee dave = new Employee("dave","bobo",null,"sacramento","california");
 		Employee kevin = new Employee("kevin","dodo",dave,"london","england");
-		System.out.println(dave.getAddress());
-		System.out.println(dave.toString());
+		System.out.println(dave.getName()+" lives in "+dave.getAddress()+" and boss is "+dave.getBoss().getName());
+		System.out.println(kevin.getName()+" lives in "+kevin.getAddress()+" and boss is " +kevin.getBoss().getName());
+		
 		
 		
 		

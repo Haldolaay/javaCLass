@@ -4,21 +4,21 @@ class RatioInfo{
 	private double percentage;
 	private static double totalRatio;
 	static private int numOfObjects;
-	RatioInfo(int GPA, int IQ){	
+	RatioInfo(int GPA, int IQ){	// constructor
 		this.GPA = GPA;
 		this.IQ = IQ;
 		this.calcRatio();
 	}
 	
-	void calcRatio(){// constructor, also calls the calculate total method
+	void calcRatio(){// this method will count the precentage, also calls the calculate total method
 		this.percentage = this.IQ/this.GPA;
 		cacTotalRatio(this);
 		}
 	double getPercentage(){return this.percentage;}// returns percentage
-	String getStatus(){
+	String getStatus(){// returns a string
 			if (this.percentage > totalRatio){return "good";}
 			else if (this.percentage == totalRatio){return "avarage";}
-			else{return "bad";}
+			else if (this.percentage < totalRatio){return "bad";}
 		}
 	
 	static void calcTotalRatio( RatioInfo obj){
@@ -32,13 +32,20 @@ class RatioInfo{
 	private RatioInfo ratio;
 	private static int studentCount;
 	
-	Student(){	}
-	Student(String fname, String lname){	}
-	Student(String fname, String lname, int GPA, int IQ){	}
+	Student(){ studentCount++;	} // first constructor
+	Student(String fname, String lname){// second constructor
+			this();
+			this.fname = fname;
+			this.lname = lname;
+		}
+	Student(String fname, String lname, int GPA, int IQ){
+			this(fname,lname);
+			
+		}
 	
 	void             setRatio(int GPA, int IQ){	}		
 	void              setName(String fname, String lname){			}
-	String           getName(){	}
+	String           getName(){ return this.fname +" "+this.lname;	}// returns full name
 	RatioInfo    getRatio( ){	}
 	
 	static int        getStudentCount(){  }

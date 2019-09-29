@@ -39,6 +39,8 @@
 	public Employee getBoss(){
 		if (this.boss == null){
 			return new Employee("null","null",null,"null","null");
+			// returning just null won't let me run the program, i keep getting an error saying 
+			// nullpointerexception so I used a new object with a null for a name;
 		}else {
 		return this.boss;
 		}
@@ -75,6 +77,7 @@ class Driver{
 		Employee kevin = new Employee("kevin","dodo",dave,"london","england");
 		System.out.println(dave.getName()+" lives in "+dave.getAddress()+" and boss is "+dave.getBoss().getName());
 		System.out.println(kevin.getName()+" lives in "+kevin.getAddress()+" and boss is " +kevin.getBoss().getName());
+	
 		
 		
 		

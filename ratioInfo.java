@@ -71,5 +71,5 @@ class driver {
 		System.out.println(jay.getRatio().getStatus());
 		
 	}
-	
+	 
 }

@@ -11,7 +11,7 @@ class RatioInfo{
 	}
 	
 	void calcRatio(){// this method will count the precentage, also calls the calculate total method
-		this.percentage = this.IQ/this.GPA;
+		this.percentage = (double)this.IQ/(double)this.GPA;
 		calcTotalRatio(this);
 		}
 	double getPercentage(){return this.percentage;}// returns percentage
@@ -24,9 +24,11 @@ class RatioInfo{
 	
 	static void calcTotalRatio( RatioInfo obj){
 				numOfObjects++;
-				totalRatio = (totalRatio+obj.getPercentage())/2;
+				totalRatio = (totalRatio+obj.getPercentage())/numOfObjects;
 		}	
 		String printRatio(){return this.GPA + " "+ this.IQ +"\npercentage is :" + this.percentage;}
+		double ratioprint(){return totalRatio;}//for testing
+		int numprint(){return numOfObjects;}
 }
 
  class Student{
@@ -60,7 +62,7 @@ class driver {
 	
 	public static void main(String[]args){
 		Student hamza = new Student();
-		hamza.setName("hamzah","null");
+		hamza.setName("hamzah","notNull");
 		hamza.setRatio(40,100);
 		
 		Student jay = new Student("jay"," keller");
@@ -79,7 +81,11 @@ class driver {
 		System.out.println(kevin.getName());
 		System.out.println(kevin.getRatio().printRatio());
 		System.out.println(kevin.getRatio().getStatus());
-		
+		System.out.println(kevin.getRatio().getPercentage());
+		System.out.println(hamza.getRatio().getPercentage());
+		System.out.println("\nrtotalratio: "+ hamza.getRatio().ratioprint());
+		System.out.println("\nnumberof students: "+ hamza.getRatio().numprint());
+		if (hamza.getRatio().getPercentage() == kevin.getRatio().ratioprint()){System.out.print("they are equal");}
 	}
 	 
 }

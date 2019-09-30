@@ -26,7 +26,7 @@ class RatioInfo{
 				numOfObjects++;
 				totalRatio = (totalRatio+obj.getPercentage())/2;
 		}	
-		String printRatio(){return this.GPA + " "+ this.IQ +"/n percentage is :" + this.percentage;}
+		String printRatio(){return this.GPA + " "+ this.IQ +"\npercentage is :" + this.percentage;}
 }
 
  class Student{
@@ -61,14 +61,24 @@ class driver {
 	public static void main(String[]args){
 		Student hamza = new Student();
 		hamza.setName("hamzah","null");
-		hamza.setRatio(40,200);
+		hamza.setRatio(40,100);
 		
 		Student jay = new Student("jay"," keller");
 		jay.setRatio(40,100);
+		
+		Student kevin = new Student("kevin", "jackson", 40, 100);
+		
 		System.out.println(hamza.getName());
+		System.out.println(hamza.getRatio().getStatus());
+		System.out.println(hamza.getRatio().printRatio());
+		
 		System.out.println(jay.getName());
 		System.out.println(jay.getRatio().printRatio());
 		System.out.println(jay.getRatio().getStatus());
+		
+		System.out.println(kevin.getName());
+		System.out.println(kevin.getRatio().printRatio());
+		System.out.println(kevin.getRatio().getStatus());
 		
 	}
 	 

@@ -1,16 +1,17 @@
 import java.lang.*; 
 import java.util.Scanner;
 public class Bank{
-  static BankAccount[] accounts; //This array will point to all the BankAccount objects
+  static BankAccount[] accounts = new BankAccount[2]; //This array will point to all the BankAccount objects
   static int noOfAccs;           //Keeps track of the total number of accounts
-  static{
-		accounts[0] = new BankAccount(0,0);
-	   accounts[0].setAcc(0);
-	   accounts[0].setBalance(0);
-  }
+	
   public static void main(String[] args) { 
 	//call bankMenu
-
+	System.out.println(noOfAccs);
+	BankAccount x = new BankAccount(0,0);
+	accounts[0] = x;
+	accounts[1] = x;
+	System.out.println(accounts[0].getAcc());
+	
 	
 	bankMenu();// the program doesn't work, i keep getting a nullPointerException!! sorry!
   }
@@ -30,23 +31,26 @@ public class Bank{
 	 String userSelection;
 	 Scanner input = new Scanner(System.in);
 	 
-	 System.out.println(" O: Open account \n D: Deposit \n S: Select account \n C: Close account \n W: Withdraw \n L: List all accounts \nQ: Quit \n");
-	 userSelection = input.nextLine();		
+	 System.out.println(" O: Open account \n D: Deposit \n S: Select account \n C: Close account \n W: Withdraw \n L: List all accounts \n Q: Quit \n");
+		if(currentIndex == -1){System.out.println("no account selected");}
+		else{System.out.println("account Number = "+ accounts[currentIndex].getAcc() +" account balance = "+ accounts[currentIndex].getBalance());};
+	userSelection = input.nextLine();		
 	 switch(userSelection){
         case "O": //Open account 
-		if(accounts[accounts.length-1] != null){
-			BankAccount temp[] = new BankAccount[accounts.length*2];
-			System.arraycopy(accounts, 0, temp, 0, accounts.length);
-			accounts = temp;
-			
-		}
-			System.out.println("Enter an account number");
+		System.out.println("Enter an account number");
 			int anumber = input.nextInt();
           //make sure you have enough space or double size OF accounts array
 		  if (isItThere(anumber)){
 			  System.out.println("account already exit, please select another account");
 			  continue;
 		  }
+		if(accounts[accounts.length-1] == null){
+			BankAccount temp[] = new BankAccount[accounts.length*2];
+			System.arraycopy(accounts, 0, temp, 0, accounts.length);
+			accounts = temp;
+			
+		}
+			
 		//make sure the account number is not a duplicate. Assign array index to account
           //set the current index;
 		  for (int i = 0 ; i< accounts.length ; i++){
@@ -118,15 +122,16 @@ public class Bank{
 	//Go through all the accounts using a for loop and display their content
 	if(accounts.length> -1){
 	for (int i =0 ; i < accounts.length ; i++){
-		System.out.println("account: " +accounts[i].getAcc()+ "         balance:"+accounts[i].getBalance());
+		System.out.println(i +" account: " +accounts[i].getAcc()+ "         balance:"+accounts[i].getBalance());
 	}
 	}else{System.out.println("there are no accounts availabe");}
   }
 
   static int selectAcc(){
     //ask for the account number, check to see if it exists and return index
-	System.out.println("Enter account number");
 	Scanner input = new Scanner(System.in);
+	System.out.println("Enter account number");
+	
 	int userInput = input.nextInt();
 	  for (int i =0; i<accounts.length;i++){
 		  if (userInput == accounts[i].getAcc()){return i;}
@@ -172,25 +177,28 @@ class BankAccount{
   
   void deposit(){     
 	//add to deposit  
-	if (this.accNbr != 0){
+	if (this.accNbr != -1){
 	    System.out.println("Enter amount of deposit:");
 		Scanner input = new Scanner(System.in);
 		double amount = input.nextDouble();
 		this.balance += amount;
+		System.out.println("thank you");
 		}
 	else{
 		System.out.print("Please select an account");
 		}
+		
   }
   
   void withdraw (){
     //withdraw as long as there is still $1 in the account
 	if (this.balance > 1){
-		System.out.println("thank you for the money");
+		
 		Scanner input = new Scanner(System.in);
 		double amount = input.nextDouble();
 		this.balance -= amount;
 		System.out.println("new balance is "+this.balance);
+		System.out.println("thank you for the money");
 	}else{
 		System.out.println("your gonna have a negative balance, try again");
 	}

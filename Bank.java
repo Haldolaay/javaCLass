@@ -1,9 +1,13 @@
 import java.lang.*; 
 import java.util.Scanner;
 public class Bank{
-  static BankAccount[] accounts = new BankAccount[2]; //This array will point to all the BankAccount objects
+  static BankAccount[] accounts; //This array will point to all the BankAccount objects
   static int noOfAccs;           //Keeps track of the total number of accounts
-      
+  static{
+		accounts[0] = new BankAccount(0,0);
+	   accounts[0].setAcc(0);
+	   accounts[0].setBalance(0);
+  }
   public static void main(String[] args) { 
 	//call bankMenu
 
@@ -12,7 +16,7 @@ public class Bank{
   }
    public static boolean isItThere(int userInput){
 	  for (int i =0; i<accounts.length;i++){
-		  if (userInput == accounts[i].getAcc()){return true;}
+		  if (accounts[i].getAcc() == userInput ){return true;}
 	  }
 	  return false;
   }

@@ -1,7 +1,7 @@
 import java.lang.*; 
 import java.util.Scanner;
 public class Bank{
-  static BankAccount[] accounts = new BankAccount[2]; //This array will point to all the BankAccount objects
+  static BankAccount[] accounts = new BankAccount[1]; //This array will point to all the BankAccount objects
   static int noOfAccs;           //Keeps track of the total number of accounts
 	
   public static void main(String[] args) { 
@@ -9,14 +9,14 @@ public class Bank{
 	System.out.println(noOfAccs);
 	BankAccount x = new BankAccount(0,0);
 	accounts[0] = x;
-	accounts[1] = x;
+	
 	System.out.println(accounts[0].getAcc());
 	
 	
 	bankMenu();// the program doesn't work, i keep getting a nullPointerException!! sorry!
   }
    public static boolean isItThere(int userInput){
-	  for (int i =0; i<accounts.length;i++){
+	  for (int i =0; i<noOfAccs;i++){
 		  if (accounts[i].getAcc() == userInput ){return true;}
 	  }
 	  return false;
@@ -28,6 +28,7 @@ public class Bank{
 	boolean quit = false;
     do{  
 	 //display menu and ask for user selection
+	 
 	 String userSelection;
 	 Scanner input = new Scanner(System.in);
 	 
@@ -40,33 +41,41 @@ public class Bank{
 		System.out.println("Enter an account number");
 			int anumber = input.nextInt();
           //make sure you have enough space or double size OF accounts array
+		  //make sure the account number is not a duplicate. Assign array index to account
 		  if (isItThere(anumber)){
 			  System.out.println("account already exit, please select another account");
 			  continue;
 		  }
-		if(accounts[accounts.length-1] == null){
+		  
+		if(noOfAccs == accounts.length){
 			BankAccount temp[] = new BankAccount[accounts.length*2];
+		
 			System.arraycopy(accounts, 0, temp, 0, accounts.length);
 			accounts = temp;
+			System.out.println("accounts length is : " + accounts.length);
 			
 		}
-			
-		//make sure the account number is not a duplicate. Assign array index to account
+
+		
           //set the current index;
-		  for (int i = 0 ; i< accounts.length ; i++){
-			  if (accounts[i] == null){
-				  currentIndex = i;
-				  System.out.println("enter new account number,");
-				  int newNumber = input.nextInt();
-				  accounts[i].setAcc(newNumber);
-				  input.next();
-				  System.out.println("enter new balance");
+		 	accounts[noOfAccs] = new BankAccount(anumber,1);
+			currentIndex = noOfAccs;
+			noOfAccs++;
+			 System.out.println("enter new balance");
 				  double newBalance = input.nextDouble();
-				  accounts[i].setBalance(newBalance);
-			  }
-		  }
+				  accounts[currentIndex].setBalance(newBalance);
+		 
+				 
+				// accounts[i].setAcc(anumber);
+		
+				  //input.next();	
+				 
+				  
+				 
+			  
+		  
           //increment the number of accounts
-		  noOfAccs++;
+		
 		  break;
         case "D": //Deposit 
           //deposit only if currentIndex is not -1. you are depositing into a particular account 
@@ -82,6 +91,7 @@ public class Bank{
 		           
         case "C": //Close account
 		closeAcc(currentIndex);
+		currentIndex = -1;
           		  break;
 		  //if currentindex is not -1 close the account and reset currentIndex		            
         case "W": //Withdraw
@@ -121,10 +131,10 @@ public class Bank{
   static void listAccounts(){
 	//Go through all the accounts using a for loop and display their content
 	if(accounts.length> -1){
-	for (int i =0 ; i < accounts.length ; i++){
+	for (int i =0 ; i < noOfAccs ; i++){
 		System.out.println(i +" account: " +accounts[i].getAcc()+ "         balance:"+accounts[i].getBalance());
 	}
-	}else{System.out.println("there are no accounts availabe");}
+	}else{System.out.println("there are no accounts available");}
   }
 
   static int selectAcc(){
@@ -147,9 +157,8 @@ public class Bank{
     //decrement noOfAccts variable
 	if (index == -1){System.out.println("Please select an account");}
 	else{
-	accounts[index] = accounts[accounts.length-1];
-	accounts[accounts.length-1] = null;
-	noOfAccs --;
+	accounts[index] = accounts[noOfAccs-1];
+	noOfAccs --;		
 	};
   }
 }
@@ -192,14 +201,15 @@ class BankAccount{
   
   void withdraw (){
     //withdraw as long as there is still $1 in the account
-	if (this.balance > 1){
-		
+			
+		System.out.println("how much do you want to take?");
 		Scanner input = new Scanner(System.in);
 		double amount = input.nextDouble();
+		if((this.balance-amount)>0){
 		this.balance -= amount;
 		System.out.println("new balance is "+this.balance);
 		System.out.println("thank you for the money");
-	}else{
+		}else{
 		System.out.println("your gonna have a negative balance, try again");
 	}
   }

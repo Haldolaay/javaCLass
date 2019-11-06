@@ -1,7 +1,7 @@
 interface Amount { 
 		void setPrice();
  }
-
+// using interfaces
 abstract class Book implements Amount {
 	String title;
 	double price;
@@ -44,6 +44,7 @@ class NonFiction extends Book {
 
 class Driver {
 	public static void main(String[]args){
+		// these can be changed later to differnt values
 	 Book[] myBooks = new Book[4];
 			myBooks[0] = new Fiction("hoho");
 			myBooks[1] = new NonFiction("scary");

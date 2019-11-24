@@ -28,7 +28,7 @@ class Driver {
 		//call addEmp inside try/catch
 		try{
 			//addEmp(12,2);
-			addEmp(12,51);
+			//addEmp(12,51);
 			addEmp(12,8);
 		}catch(EmployeeException e){
 			e.k();

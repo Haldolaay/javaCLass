@@ -20,7 +20,14 @@ public class Numbers {
 		
 		//Use System.arraycopy to make a copy to another int array
 		//feed the array and get back and array of wrapper class Integer
-		
+		@parameters arraycopy(sourceArray,position,destinationArray,position,howManyElements
+		*/
+	        *sourceArray: the array we are copying from
+		*position: where do we start copying from
+		*destinationArray: where are we copying too
+		*position:where do we start 
+		* howManyElements: how many do we want to copy
+		 /*
 		System.arraycopy(toInteger(a),0,array,0,a.length);
 		//display sorted order
 		display(array);

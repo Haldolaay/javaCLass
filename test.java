@@ -17,3 +17,18 @@ public class GettingStarted {
     driver.quit();
   }
 }
+                       class Lamp{
+      public String color;
+      public String state;
+      public Lamp(String color, String state){
+             setColor(color);
+             setState(state);
+      }
+      public void setColor(String color){this.color = color;}
+      public void setState(String state){this.state = state;}
+      public String getColor(){return this.color;}
+      public String getState(){return this.state;}
+      public static void main(String[] args){
+                    Lamp obj = new Lamp("red","on");
+      }
+}

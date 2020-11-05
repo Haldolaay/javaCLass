@@ -13,6 +13,21 @@ class Solution {
    }
         return nums;
 }
+	// this function will reverse a 2d array
+	public static void flipItVerticalAxis(int[][] matrix) {
+     int count = 0 ;
+    int temp = 0 ;
+    for(int i = 0 ; i < matrix.length; i++){
+        count = matrix[i].length-1;
+        for(int j = 0 ; j< matrix[i].length/2 ; j++){
+      
+            temp = matrix[i][j];
+            matrix[i][j] = matrix[i][count];
+            matrix[i][count] = temp;
+          
+        }
+        
+}
 }
 class driver{
 	public static void main(String[]args){
